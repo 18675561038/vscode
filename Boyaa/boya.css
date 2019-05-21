@@ -1,0 +1,10 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+/* 设置全局内外边距为o */
+body{
+    font-size:14px;
+    font-family: "Microsoft YaHei","SimSun";
+    height: 888px;
+}
