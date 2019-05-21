@@ -1,10 +1,135 @@
-*{
-    margin: 0px;
-    padding: 0px;
+* {
+  margin: 0px;
+  padding: 0px;
 }
 /* 设置全局内外边距为o */
-body{
-    font-size:14px;
-    font-family: "Microsoft YaHei","SimSun";
-    height: 888px;
+/*清除浮动的影响*/
+.cl {
+  clear: both;
+}
+body {
+  font-size: 14px;
+  font-family: "Microsoft YaHei", "SimSun";
+  height: 8888px;
+}
+.header {
+  height: 58px;
+  background-color: #191d3a;
+}
+/* 版心 */
+.inner_c {
+  width: 1000px;
+  margin: 0 auto; /* 让导航条、内容区域等部分的版心在父亲里居中 */
+}
+/* 导航LOGO */
+.header .logo {
+  float: left;
+  padding-left: 12px;
+  margin-right: 40px;
+  width: 174px;
+  height: 58px;
+  /* http://www.boyaa.com/images/logo.png */
+}
+.header .logo a {
+  display: block;
+  width: 174px;
+  height: 58px;
+  background: url("http://www.boyaa.com/images/logo.png") no-repeat;
+  text-indent: -999em;
+}
+.header .nav ul {
+  list-style: none; /* 去掉列表前面远点 */
+}
+.header .nav ul li {
+  float: left;
+  width: 100px;
+  line-height: 58px; /*让行高等于这一行的高度，保证里面的文字垂直居中*/
+  border-left: 1px solid #252947; /*每个li之间有间隔线*/
+}
+.header .nav ul li.list {
+  border-right: 1px solid #252947;
+}
+.header .nav ul li a {
+  display: block; /*将超链接转为块儿，可以保证其霸占父亲的整行*/
+  height: 58px;
+  text-decoration: none; /*去掉超链的下划线*/
+  color: #818496;
+  text-align: center; /*让这个div内部的文本居中*/
+}
+.header .nav ul li a.current {
+  color: white;
+  background: #252947;
+}
+.header .nav ul li a:hover {
+  color: white;
+  background: #252947;
+}
+.header .jrwm_box {
+  float: left;
+  height: 58px;
+  width: 100px;
+  padding-left: 48px;
+  padding-top: 12px;
+}
+/*放背景图片的div*/
+.header .jrwm_box .jrwm {
+  height: 32px;
+  background-image: url();
+  background-repeat: no-repeat;
+  text-align: center; /*让这个div内部的超链接居中*/
+}
+.header .jrwm_box .jrwm a {
+  display: block; /*将超链接转为块儿，可以保证其霸占父亲的整行*/
+  line-height: 34px; /*让行高为背景图片的高度，可以保证超链接的文字在背景图片里垂直居中*/
+  text-decoration: none; /*去掉超链的下划线*/
+  color: white;
+  background-color: #3aca7a;
+}
+
+.banner {
+  height: 465px;
+  background: url(http://www.boyaa.com/pic/2018banner.jpg) no-repeat center top;
+}
+.content {
+  padding-top: 50px;
+}
+.content .prodict {
+  height: 229px;
+  border-bottom: 1px solid #dbe1e7;
+}
+.content .prodict ul {
+  list-style: none;
+}
+.content .prodict ul li {
+  float: left;
+  width: 218px;
+  margin-right: 43px;
+}
+.content .prodict ul li.last {
+  margin-right: 0;
+  width: 217px;
+}
+.content .prodict ul li img {
+  width: 218px;
+  height: 130px;
+}
+.content .prodict ul li.last img {
+  width: 217px;
+}
+.content .prodict ul li h3 {
+  text-align: center;
+  line-height: 38px;
+  font-size: 14px;
+  font-weight: bold;
+}
+.content .prodict ul li p.djbf {
+  text-align: center;
+  line-height: 16px;
+}
+.content .prodict ul li p.djbf a {
+  font-size: 12px;
+  color: #38b774;
+  text-decoration: none;
+  background: url(http://www.boyaa.com/images/arrow.png) no-repeat right center;
+  padding-right: 12px;
 }
