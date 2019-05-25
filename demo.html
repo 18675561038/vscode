@@ -1,110 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Document</title>
-</head>
-<style>
-    label {
-        display: block;
-        vertical-align: middle;
-    }
-
-    label,
-    input,
-    select {
-        vertical-align: middle;
-    }
-
-    .mui-switch {
-        width: 52px;
-        height: 31px;
-        position: relative;
-        border: 1px solid #dfdfdf;
-        background-color: #fdfdfd;
-        box-shadow: #dfdfdf 0 0 0 0 inset;
-        border-radius: 20px;
-        border-top-left-radius: 20px;
-        border-top-right-radius: 20px;
-        border-bottom-left-radius: 20px;
-        border-bottom-right-radius: 20px;
-        background-clip: content-box;
-        display: inline-block;
-        -webkit-appearance: none;
-        user-select: none;
-        outline: none;
-    }
-
-    .mui-switch:before {
-        content: '';
-        width: 29px;
-        height: 29px;
-        position: absolute;
-        top: 0px;
-        left: 0;
-        border-radius: 20px;
-        border-top-left-radius: 20px;
-        border-top-right-radius: 20px;
-        border-bottom-left-radius: 20px;
-        border-bottom-right-radius: 20px;
-        background-color: #fff;
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
-    }
-
-    .mui-switch:checked {
-        border-color: #64bd63;
-        box-shadow: #64bd63 0 0 0 16px inset;
-        background-color: #64bd63;
-    }
-
-    .mui-switch:checked:before {
-        left: 21px;
-    }
-
-    .mui-switch.mui-switch-animbg {
-        transition: background-color ease 0.4s;
-    }
-
-    .mui-switch.mui-switch-animbg:before {
-        transition: left 0.3s;
-    }
-
-    .mui-switch.mui-switch-animbg:checked {
-        box-shadow: #dfdfdf 0 0 0 0 inset;
-        background-color: #64bd63;
-        transition: border-color 0.4s, background-color ease 0.4s;
-    }
-
-    .mui-switch.mui-switch-animbg:checked:before {
-        transition: left 0.3s;
-    }
-
-    .mui-switch.mui-switch-anim {
-        transition: border cubic-bezier(0, 0, 0, 1) 0.4s, box-shadow cubic-bezier(0, 0, 0, 1) 0.4s;
-    }
-
-    .mui-switch.mui-switch-anim:before {
-        transition: left 0.3s;
-    }
-
-    .mui-switch.mui-switch-anim:checked {
-        box-shadow: #64bd63 0 0 0 16px inset;
-        background-color: #64bd63;
-        transition: border ease 0.4s, box-shadow ease 0.4s, background-color ease 1.2s;
-    }
-
-    .mui-switch.mui-switch-anim:checked:before {
-        transition: left 0.3s;
-    }
-
+  </head>
+  <style>
     /*# sourceMappingURL=mui-switch.css.map */
-</style>
-
-<body>
-    <label>
+  </style>
+    <link rel="stylesheet" href="demo.css">
+  <body>
+    <!-- <label>
         <input class="mui-switch" type="checkbox"> 默认未选中</label>
     <label>
         <input class="mui-switch" type="checkbox" checked> 默认选中</label>
@@ -116,7 +23,161 @@
         <input class="mui-switch mui-switch-anim" type="checkbox"> 默认未选中，过渡效果，加 mui-switch-anim 类即可
     </label>
     <label>
-        <input class="mui-switch mui-switch-anim" type="checkbox" checked> 默认选中</label>
-</body>
+		<input class="mui-switch mui-switch-anim" type="checkbox" checked> 默认选中</label> -->
+        <script src="tools.js"></script>    
+    <script>
 
+// //需求：点击页面的任何地方，图片跟随鼠标移动到点击位置。
+    // //思路：获取鼠标在页面中的位置，然图片缓慢运动到鼠标点击的位置。
+    // //  兼容ie67做pageY和pageX；
+    // //  原理：     鼠标在页面的位置 = 被卷去的部分+可视区域部分。
+    // //步骤：
+    // //1.老三步。
+    // //2.获取鼠标在页面中的位置。
+    // //3.利用缓动原理，慢慢的运动到指定位置。（包括左右和上下）
+
+    // //1.老三步。
+    // var img = document.getElementsByTagName("img")[0];
+    // var timer = null;
+    // var targetx = 0;
+    // var targety = 0;
+    // var leaderx = 0;
+    // var leadery = 0;
+    // //给整个文档绑定点击事件获取鼠标的位置。
+    // document.onclick = function (event) {
+    //     //新五步
+    //     //兼容获取事件对象
+    //     event = event || window.event;
+    //     //鼠标在页面的位置 = 被卷去的部分+可视区域部分。
+    //     var pagey = event.pageY || scroll().top + event.clientY;
+    //     var pagex = event.pageX || scroll().left + event.clientX;
+
+    //     targety = pagey - 30;
+    //     targetx = pagex - 50;
+
+    //     //要用定时器，先清定时器
+    //     clearInterval(timer);
+    //     timer = setInterval(function () {
+    //         //为盒子的位置获取值
+    //         leaderx = img.offsetLeft;
+    //         //获取步长
+    //         var stepx = (targetx - leaderx) / 10;
+    //         //二次处理步长
+    //         stepx = stepx > 0 ? Math.ceil(stepx) : Math.floor(stepx);
+    //         leaderx = leaderx + stepx;
+    //         //赋值
+    //         img.style.left = leaderx + "px";
+
+
+    //         //为盒子的位置获取值
+    //         leadery = img.offsetTop;
+    //         //获取步长
+    //         var stepy = (targety - leadery) / 10;
+    //         //二次处理步长
+    //         stepy = stepy > 0 ? Math.ceil(stepy) : Math.floor(stepy);
+    //         leadery = leadery + stepy;
+    //         //赋值
+    //         img.style.top = leadery + "px";
+
+    //         //清定时器
+    //         if (Math.abs(targety - img.offsetTop) <= Math.abs(stepy) && Math.abs(targetx - img.offsetLeft) <= Math.abs(stepx)) {
+    //             img.style.top = targety + "px";
+    //             img.style.left = targetx + "px";
+    //             clearInterval(timer);
+    //         }
+    //     }, 30);
+    // }
+
+    window.onload = function () {
+            //需求：鼠标放到小盒子上，让大盒子里面的图片和我们同步等比例移动。
+            //技术点：onmouseenter==onmouseover 第一个不冒泡
+            //技术点：onmouseleave==onmouseout  第一个不冒泡
+            //步骤：
+            //1.鼠标放上去显示盒子，移开隐藏盒子。
+            //2.老三步和新五步（黄盒子跟随移动）
+            //3.右侧的大图片，等比例移动。
+
+            //0.获取相关元素
+            var box = document.getElementsByClassName("box")[0];
+            var small = box.firstElementChild || box.firstChild;
+            var big = box.children[1];
+            var mask = small.children[1];
+            var bigImg = big.children[0];
+
+            //1.鼠标放上去显示盒子，移开隐藏盒子。(为小盒子绑定事件)
+            small.onmouseenter = function () {
+                //封装好方法调用：显示元素
+                show(mask);
+                show(big);
+            }
+            small.onmouseleave = function () {
+                //封装好方法调用：隐藏元素
+                hide(mask);
+                hide(big);
+            }
+
+            //2.老三步和新五步（黄盒子跟随移动）
+            //绑定的事件是onmousemove，而事件源是small(只要在小盒子上移动1像素，黄盒子也要跟随)
+            small.onmousemove = function (event) {
+                //新五步
+                event = event || window.event;
+
+                //想要移动黄盒子，必须要知道鼠标在small小图中的位置。
+                var pagex = event.pageX || scroll().left + event.clientX;
+                var pagey = event.pageY || scroll().top + event.clientY;
+
+                //x：mask的left值，y：mask的top值。
+                var x = pagex - box.offsetLeft - mask.offsetWidth / 2; //除以2，可以保证鼠标mask的中间
+                var y = pagey - box.offsetTop - mask.offsetHeight / 2;
+
+                //限制换盒子的范围
+                //left取值为大于0，小盒子的宽-mask的宽。
+                if (x < 0) {
+                    x = 0;
+                }
+                if (x > small.offsetWidth - mask.offsetWidth) {
+                    x = small.offsetWidth - mask.offsetWidth;
+                }
+                //top同理。
+                if (y < 0) {
+                    y = 0;
+                }
+                if (y > small.offsetHeight - mask.offsetHeight) {
+                    y = small.offsetHeight - mask.offsetHeight;
+                }
+
+                //移动黄盒子
+                console.log(small.offsetHeight);
+                mask.style.left = x + "px";
+                mask.style.top = y + "px";
+
+                //3.右侧的大图片，等比例移动。
+                //如何移动大图片？等比例移动。
+                //    大图片/大盒子 = 小图片/mask盒子
+                //    大图片走的距离/mask走的距离 = （大图片-大盒子）/（小图片-黄盒子）
+//                var bili = (bigImg.offsetWidth-big.offsetWidth)/(small.offsetWidth-mask.offsetWidth);
+
+                //大图片走的距离/mask盒子都的距离 = 大图片/小图片
+                var bili = bigImg.offsetWidth / small.offsetWidth;
+
+                var xx = bili * x;  //知道比例，就可以移动大图片了
+                var yy = bili * y;
+
+                bigImg.style.marginTop = -yy + "px";
+                bigImg.style.marginLeft = -xx + "px";
+            }
+        }
+
+
+    </script>
+<div class="box">
+    <div class="small">
+        <img src="img/书架桌面01.jpg" alt="">
+        <div class="mask"></div>
+    </div>
+    <div class="big">
+        <img src="img/书架桌面02.jpg" alt="">
+    </div>
+</div>
+</body>
 </html>
